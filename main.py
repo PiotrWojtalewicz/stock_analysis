@@ -29,3 +29,7 @@ daily_F = openpyxl.load_workbook('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_an
 daily_BA = openpyxl.load_workbook('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_BA.xlsx')
 daily_SP500 = openpyxl.load_workbook('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_SP500.xlsx')
 
+print(daily_GM)
+print(daily_F)
+print(daily_BA)
+print(daily_SP500)
