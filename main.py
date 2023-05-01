@@ -5,6 +5,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
 import openpyxl
+import matplotlib
 
 '''date = []
 closed_price = []
@@ -24,12 +25,26 @@ print(df)'''
 
 #data import to Python
 
-daily_GM = openpyxl.load_workbook('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_GM.xlsx')
-daily_F = openpyxl.load_workbook('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_F.xlsx')
-daily_BA = openpyxl.load_workbook('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_BA.xlsx')
-daily_SP500 = openpyxl.load_workbook('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_SP500.xlsx')
+daily_GM = pd.read_excel('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_GM.xlsx')
+daily_F = pd.read_excel('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_F.xlsx')
+daily_BA = pd.read_excel('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_BA.xlsx')
+daily_SP500 = pd.read_excel('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_SP500.xlsx')
 
-print(daily_GM)
-print(daily_F)
-print(daily_BA)
-print(daily_SP500)
+#Convert excel file to Data Frame
+df_daily_GM = pd.DataFrame(daily_GM, columns=['Date', 'Adj Close'])
+df_daily_F = pd.DataFrame(daily_F,columns=['Date', 'Adj Close'])
+df_daily_BA = pd.DataFrame(daily_BA,columns=['Date', 'Adj Close'])
+df_daily_SP500 = pd.DataFrame(daily_SP500, columns= ['Data', 'Close'])
+
+print(df_daily_GM)
+print(df_daily_F)
+print(df_daily_BA)
+print(df_daily_SP500)
+
+#change columns name in df daily SP500
+df_daily_SP500 = df_daily_SP500.rename(columns={'Data':'Date', 'Close': 'Adj Close'})
+print((df_daily_SP500))
+
+#simple plots adjust close prices
+x = df_daily_GM['Date']
+y = df_daily_SP500['Adj Close']
