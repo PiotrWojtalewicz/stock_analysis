@@ -5,7 +5,8 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
 import openpyxl
-import matplotlib
+import matplotlib.pyplot as plt
+
 
 '''date = []
 closed_price = []
@@ -45,6 +46,12 @@ print(df_daily_SP500)
 df_daily_SP500 = df_daily_SP500.rename(columns={'Data':'Date', 'Close': 'Adj Close'})
 print((df_daily_SP500))
 
-#simple plots adjust close prices
+#simple plot adjust close prices General Motors
 x = df_daily_GM['Date']
 y = df_daily_SP500['Adj Close']
+plt.plot(x,y)
+plt.xlabel('Date')
+plt.ylabel('Adj Close')
+plt.title("Daily adjust close General Motors")
+plt.show()
+
