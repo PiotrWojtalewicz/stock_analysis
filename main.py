@@ -6,7 +6,8 @@ import requests
 from bs4 import BeautifulSoup as bs
 import openpyxl
 import matplotlib.pyplot as plt
-
+import math
+import numpy as np
 
 '''date = []
 closed_price = []
@@ -46,6 +47,7 @@ print(df_daily_SP500)
 df_daily_SP500 = df_daily_SP500.rename(columns={'Data':'Date', 'Close': 'Adj Close'})
 print((df_daily_SP500))
 
+#################################### GENERAL MOTORS ANALYSIS ####################################
 #simple plot adjust close prices General Motors
 x = df_daily_GM['Date']
 y = df_daily_SP500['Adj Close']
@@ -54,4 +56,19 @@ plt.xlabel('Date')
 plt.ylabel('Adj Close')
 plt.title("Daily adjust close General Motors")
 plt.show()
+
+#add new columns to data frame with rates of retune
+df_daily_GM['R'] = (df_daily_GM['Adj Close'] / df_daily_GM['Adj Close'].shift(1))-1
+df_daily_GM.loc[0,'R']
+
+df_daily_GM['r'] = np.log(df_daily_GM['Adj Close'] / df_daily_GM['Adj Close'].shift(1))
+df_daily_GM.loc[0,'r']
+
+print(df_daily_GM)
+
+print(df_daily_GM['R'].mean())
+print(df_daily_GM['r'].mean())
+
+
+
 
