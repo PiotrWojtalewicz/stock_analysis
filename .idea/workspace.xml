@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="009579b6-90bd-4bc6-b675-31a247f02b7f" name="Changes" comment="General Motors' rates of retune">
+    <list default="true" id="009579b6-90bd-4bc6-b675-31a247f02b7f" name="Changes" comment="skews, kurtosis and correlation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,12 +50,20 @@
       <option name="project" value="LOCAL" />
       <updated>1682977068260</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="skews, kurtosis and correlation">
+      <created>1683215093195</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683215093195</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First plot" />
     <MESSAGE value="General Motors' rates of retune" />
-    <option name="LAST_COMMIT_MESSAGE" value="General Motors' rates of retune" />
+    <MESSAGE value="skews, kurtosis and correlation" />
+    <option name="LAST_COMMIT_MESSAGE" value="skews, kurtosis and correlation" />
   </component>
 </project>
