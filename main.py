@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import math
 import numpy as np
 
+
 '''date = []
 closed_price = []
 ALE = [f'https://finance.yahoo.com/quote/ALE/history?p=ALE']
@@ -60,15 +61,68 @@ plt.show()
 #add new columns to data frame with rates of retune
 df_daily_GM['R'] = (df_daily_GM['Adj Close'] / df_daily_GM['Adj Close'].shift(1))-1
 df_daily_GM.loc[0,'R']
+df_daily_F['R'] = (df_daily_F['Adj Close'] / df_daily_F['Adj Close'].shift(1))-1
+df_daily_F.loc[0,'R']
+df_daily_BA['R'] = (df_daily_BA['Adj Close'] / df_daily_BA['Adj Close'].shift(1))-1
+df_daily_BA.loc[0,'R']
+df_daily_SP500['R'] = (df_daily_SP500['Adj Close'] / df_daily_SP500['Adj Close'].shift(1))-1
+df_daily_SP500.loc[0,'R']
+
 
 df_daily_GM['r'] = np.log(df_daily_GM['Adj Close'] / df_daily_GM['Adj Close'].shift(1))
 df_daily_GM.loc[0,'r']
+df_daily_F['r'] = np.log(df_daily_F['Adj Close'] / df_daily_F['Adj Close'].shift(1))
+df_daily_F.loc[0,'r']
+df_daily_BA['r'] = np.log(df_daily_BA['Adj Close'] / df_daily_BA['Adj Close'].shift(1))
+df_daily_BA.loc[0,'r']
+df_daily_SP500['r'] = np.log(df_daily_SP500['Adj Close'] / df_daily_SP500['Adj Close'].shift(1))
+df_daily_SP500.loc[0,'r']
 
 print(df_daily_GM)
+print(df_daily_F)
+print(df_daily_BA)
+print(df_daily_SP500)
 
+
+#mean of rates of retune
 print(df_daily_GM['R'].mean())
-print(df_daily_GM['r'].mean())
+print(df_daily_F['R'].mean())
+print(df_daily_BA['R'].mean())
+print(df_daily_SP500['R'].mean())
+
+#skew of rates of retune
+skewGM= df_daily_GM['R'].skew()
+skewF= df_daily_F['R'].skew()
+skewBA= df_daily_BA['R'].skew()
+skewSP500= df_daily_SP500['R'].skew()
+print(skewGM)
+print(skewF)
+print(skewBA)
+print(skewSP500)
+
+#kurtosis of rates of retune
+kurtosisGM = df_daily_GM['R'].kurtosis()
+kurtosisF = df_daily_F['R'].kurtosis()
+kurtosisBA = df_daily_BA['R'].kurtosis()
+kurtosisSP500 = df_daily_SP500['R'].kurtosis()
+print(kurtosisGM)
+print(kurtosisF)
+print(kurtosisBA)
+print(kurtosisSP500)
 
 
+#create data frame with values of skew and kurtosis
+ValuesOfSkewKurtosis = [[skewGM, kurtosisGM],[skewF,kurtosisF],[skewBA,kurtosisBA],[skewSP500,kurtosisSP500]]
+df_ValuesOfSkewKurtosis = pd.DataFrame(ValuesOfSkewKurtosis)
+df_ValuesOfSkewKurtosis.columns = 'Skew', 'Kurtosis'
+df_ValuesOfSkewKurtosis.index = ['General Motors', 'Ford Company', 'Boeing Company', 'SP500']
+print(df_ValuesOfSkewKurtosis.abs())
 
-
+#correlation
+data_to_correlation = [df_daily_GM['R'], df_daily_F["R"], df_daily_BA["R"], df_daily_SP500["R"]]
+df_data_to_correlation = pd.DataFrame(data_to_correlation)
+df_data_to_correlation.index = ['GM', 'F', "B", "SP500"]
+df_data_to_correlation = df_data_to_correlation.T
+df_data_to_correlation = df_data_to_correlation.drop(0)
+print(df_data_to_correlation)
+print(df_data_to_correlation.corr())
