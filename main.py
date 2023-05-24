@@ -2,6 +2,7 @@
 
 import time
 
+import pandas
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
@@ -63,7 +64,8 @@ plt.ylabel('Adj Close')
 plt.title("Daily adjust close General Motors")
 plt.show()
 
-#add new columns to data frame with rates of retune
+#######################add new columns to data frame with rates of retune######################################
+
 df_daily_GM['Daily Return'] = df_daily_GM['Adj Close'].pct_change()
 df_daily_GM['Daily Return'] = df_daily_GM['Daily Return'].fillna(0)
 
@@ -77,11 +79,20 @@ df_daily_SP500['Daily Return'] = df_daily_SP500['Adj Close'].pct_change()
 df_daily_SP500['Daily Return'] = df_daily_SP500['Daily Return'].fillna(0)
 
 
-
 print(df_daily_GM)
 print(df_daily_F)
 print(df_daily_BA)
 print(df_daily_SP500)
+
+###histogram of daily returns###
+plt.hist(df_daily_GM['Daily Return'],bins=100,color='steelblue', edgecolor='black', alpha=0.7)
+plt.grid(linestyle= 'dotted', linewidth=0.5, color='gray')
+plt.tick_params(axis='both', which='both', direction='in', length=4)
+plt.xlabel("Daily Returns")
+plt.ylabel("count")
+plt.title("GM")
+plt.show()
+
 
 
 #mean of rates of retune
@@ -118,10 +129,19 @@ df_ValuesOfSkewKurtosis.columns = 'Skew', 'Kurtosis'
 df_ValuesOfSkewKurtosis.index = ['General Motors', 'Ford Company', 'Boeing Company', 'SP500']
 print(df_ValuesOfSkewKurtosis.abs())
 
+
+#correlations
 data_to_correlation = [df_daily_GM['Daily Return'], df_daily_F["Daily Return"], df_daily_BA["Daily Return"], df_daily_SP500["Daily Return"]]
 df_data_to_correlation = pd.DataFrame(data_to_correlation)
 df_data_to_correlation.index = ['GM', 'F', "B", "SP500"]
 df_data_to_correlation = df_data_to_correlation.T
 print(df_data_to_correlation)
 print(df_data_to_correlation.corr())
+
+######
+portfolio = pd.concat([df_daily_GM,df_daily_F,df_daily_BA,df_daily_SP500], keys = ['GM','F','BA', 'SP500'], names=["Tickers", 'Date'])
+portfolio = portfolio[['Adj Close']].reset_index().pivot(index = 'Date', columns= 'Tickers', values = 'Adj Close')
+print(portfolio)
+
+
 
