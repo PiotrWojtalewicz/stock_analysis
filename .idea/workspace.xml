@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="009579b6-90bd-4bc6-b675-31a247f02b7f" name="Changes" comment="download date from yfinance library">
+    <list default="true" id="009579b6-90bd-4bc6-b675-31a247f02b7f" name="Changes" comment="x">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -79,7 +79,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684767703383</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="x">
+      <created>1684913745464</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1684913745464</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -87,6 +94,7 @@
     <MESSAGE value="General Motors' rates of retune" />
     <MESSAGE value="skews, kurtosis and correlation" />
     <MESSAGE value="download date from yfinance library" />
-    <option name="LAST_COMMIT_MESSAGE" value="download date from yfinance library" />
+    <MESSAGE value="x" />
+    <option name="LAST_COMMIT_MESSAGE" value="x" />
   </component>
 </project>

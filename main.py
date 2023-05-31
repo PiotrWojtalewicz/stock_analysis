@@ -17,13 +17,7 @@ import yfinance as yf
 
 
 
-'''#data import to Python
 
-daily_GM = pd.read_excel('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_GM.xlsx')
-daily_F = pd.read_excel('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_F.xlsx')
-daily_BA = pd.read_excel('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_BA.xlsx')
-daily_SP500 = pd.read_excel('C:/Users/piotr/OneDrive/Pulpit/Studia/stock_analyst/Dzienne_stopy_zwrotu_SP500.xlsx')
-'''
 
 
 daily_GM = yf.download("GM", start= '2013-12-31', end = '2021-12-31')
@@ -58,7 +52,7 @@ df_daily_SP500['Date'] = df_daily_SP500.index
 #simple plot adjust close prices General Motors
 x = df_daily_GM['Date']
 y = df_daily_SP500['Adj Close']
-plt.plot(x,y)
+plt.plot(df_daily_GM['Date'],df_daily_SP500['Adj Close'], color = 'red')
 plt.xlabel('Date')
 plt.ylabel('Adj Close')
 plt.title("Daily adjust close General Motors")
@@ -66,29 +60,25 @@ plt.show()
 
 #######################add new columns to data frame with rates of retune######################################
 
-df_daily_GM['Daily Return'] = df_daily_GM['Adj Close'].pct_change()
-df_daily_GM['Daily Return'] = df_daily_GM['Daily Return'].fillna(0)
+df_daily_GM['Daily_Return'] = df_daily_GM['Adj Close'].pct_change()
+df_daily_GM['Daily_Return'] = df_daily_GM['Daily_Return'].fillna(0)
 
-df_daily_F['Daily Return'] = df_daily_F['Adj Close'].pct_change()
-df_daily_F['Daily Return'] = df_daily_F['Daily Return'].fillna(0)
+df_daily_F['Daily_Return'] = df_daily_F['Adj Close'].pct_change()
+df_daily_F['Daily_Return'] = df_daily_F['Daily_Return'].fillna(0)
 
-df_daily_BA['Daily Return'] = df_daily_BA['Adj Close'].pct_change()
-df_daily_BA['Daily Return'] = df_daily_BA['Daily Return'].fillna(0)
+df_daily_BA['Daily_Return'] = df_daily_BA['Adj Close'].pct_change()
+df_daily_BA['Daily_Return'] = df_daily_BA['Daily_Return'].fillna(0)
 
-df_daily_SP500['Daily Return'] = df_daily_SP500['Adj Close'].pct_change()
-df_daily_SP500['Daily Return'] = df_daily_SP500['Daily Return'].fillna(0)
+df_daily_SP500['Daily_Return'] = df_daily_SP500['Adj Close'].pct_change()
+df_daily_SP500['Daily_Return'] = df_daily_SP500['Daily_Return'].fillna(0)
 
 
-print(df_daily_GM)
-print(df_daily_F)
-print(df_daily_BA)
-print(df_daily_SP500)
 
-###histogram of daily returns###
-plt.hist(df_daily_GM['Daily Return'],bins=100,color='steelblue', edgecolor='black', alpha=0.7)
+###histogram of adj close###
+plt.hist(df_daily_GM['Adj Close'],bins=100,color='steelblue', edgecolor='black', alpha=0.7)
 plt.grid(linestyle= 'dotted', linewidth=0.5, color='gray')
 plt.tick_params(axis='both', which='both', direction='in', length=4)
-plt.xlabel("Daily Returns")
+plt.xlabel("Adj Close")
 plt.ylabel("count")
 plt.title("GM")
 plt.show()
@@ -96,26 +86,26 @@ plt.show()
 
 
 #mean of rates of retune
-print(df_daily_GM['Daily Return'].mean())
-print(df_daily_F['Daily Return'].mean())
-print(df_daily_BA['Daily Return'].mean())
-print(df_daily_SP500['Daily Return'].mean())
+print(df_daily_GM['Daily_Return'].mean())
+print(df_daily_F['Daily_Return'].mean())
+print(df_daily_BA['Daily_Return'].mean())
+print(df_daily_SP500['Daily_Return'].mean())
 
 #skew of rates of retune
-skewGM= df_daily_GM['Daily Return'].skew()
-skewF= df_daily_F['Daily Return'].skew()
-skewBA= df_daily_BA['Daily Return'].skew()
-skewSP500= df_daily_SP500['Daily Return'].skew()
+skewGM= df_daily_GM['Daily_Return'].skew()
+skewF= df_daily_F['Daily_Return'].skew()
+skewBA= df_daily_BA['Daily_Return'].skew()
+skewSP500= df_daily_SP500['Daily_Return'].skew()
 print(skewGM)
 print(skewF)
 print(skewBA)
 print(skewSP500)
 
 #kurtosis of rates of retune
-kurtosisGM = df_daily_GM['Daily Return'].kurtosis()
-kurtosisF = df_daily_F['Daily Return'].kurtosis()
-kurtosisBA = df_daily_BA['Daily Return'].kurtosis()
-kurtosisSP500 = df_daily_SP500['Daily Return'].kurtosis()
+kurtosisGM = df_daily_GM['Daily_Return'].kurtosis()
+kurtosisF = df_daily_F['Daily_Return'].kurtosis()
+kurtosisBA = df_daily_BA['Daily_Return'].kurtosis()
+kurtosisSP500 = df_daily_SP500['Daily_Return'].kurtosis()
 print(kurtosisGM)
 print(kurtosisF)
 print(kurtosisBA)
@@ -131,17 +121,59 @@ print(df_ValuesOfSkewKurtosis.abs())
 
 
 #correlations
-data_to_correlation = [df_daily_GM['Daily Return'], df_daily_F["Daily Return"], df_daily_BA["Daily Return"], df_daily_SP500["Daily Return"]]
+data_to_correlation = [df_daily_GM['Daily_Return'], df_daily_F["Daily_Return"], df_daily_BA["Daily_Return"], df_daily_SP500["Daily_Return"]]
 df_data_to_correlation = pd.DataFrame(data_to_correlation)
 df_data_to_correlation.index = ['GM', 'F', "B", "SP500"]
 df_data_to_correlation = df_data_to_correlation.T
 print(df_data_to_correlation)
 print(df_data_to_correlation.corr())
 
-######
+###### all tickets in one place/table######
 portfolio = pd.concat([df_daily_GM,df_daily_F,df_daily_BA,df_daily_SP500], keys = ['GM','F','BA', 'SP500'], names=["Tickers", 'Date'])
 portfolio = portfolio[['Adj Close']].reset_index().pivot(index = 'Date', columns= 'Tickers', values = 'Adj Close')
 print(portfolio)
+
+portfolio.pct_change().hist(bins=50,sharex =True)
+plt.show()
+
+################CAGR############# ?????????????????????????????
+SMA = pd.concat([df_daily_GM,df_daily_F,df_daily_BA,df_daily_SP500], keys = ['GM','F','BA', 'SP500'], names=["Tickers", 'Date'])
+SMA = SMA[['Daily_Return']].reset_index().pivot(index = 'Date', columns= 'Tickers', values = 'Daily_Return')
+print(SMA)
+
+SMA_1= SMA.apply(lambda x: x + 1)
+print(SMA_1)
+
+CAGR = SMA_1.cumprod()
+print(CAGR)
+#Plot
+plt.plot(CAGR['GM'])
+plt.plot(CAGR['F'])
+plt.plot(CAGR['BA'])
+plt.plot(CAGR['SP500'])
+plt.legend(['GM','F','BA','SP500'])
+plt.xlabel('Date')
+plt.ylabel('Value of CAGR')
+plt.show()
+
+
+############### GM SMA for 42 days and 252 days ###############
+
+print(df_daily_GM['Adj Close'].rolling(window=42).mean(), df_daily_GM['Adj Close'].rolling(window=252).mean())
+
+plt.plot(df_daily_GM['Adj Close'].rolling(window=42).mean())
+plt.plot(df_daily_GM['Adj Close'].rolling(window=252).mean())
+plt.plot(df_daily_GM['Adj Close'])
+plt.xlabel('Data')
+plt.ylabel("Value of window")
+plt.legend(['42mean','252mean', 'Adj Close'])
+plt.show()
+
+###################
+
+
+
+
 
 
 
