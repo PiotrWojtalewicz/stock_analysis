@@ -2,7 +2,6 @@
 
 import time
 
-import pandas
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
@@ -13,6 +12,7 @@ import numpy as np
 import datetime as dt
 import pandas_datareader as pdr
 import yfinance as yf
+from datetime import datetime, timedelta
 
 
 
@@ -20,13 +20,16 @@ import yfinance as yf
 
 
 
-daily_GM = yf.download("GM", start= '2013-12-31', end = '2021-12-31')
+endtime = datetime.now()
+starttime = endtime-timedelta(days=60)
+
+daily_GM = yf.download("GM", start= starttime, end = endtime)
 print(daily_GM)
-daily_F = yf.download("F", start= '2013-12-31', end = '2021-12-31')
+daily_F = yf.download("F", start= starttime, end = endtime)
 print(daily_GM)
-daily_BA = yf.download("BA", start= '2013-12-31', end = '2021-12-31')
+daily_BA = yf.download("BA", start= starttime, end = endtime)
 print(daily_BA)
-daily_SP500 = yf.download("^GSPC", start= '2013-12-31', end = '2021-12-31')
+daily_SP500 = yf.download("^GSPC", start= starttime, end = endtime)
 print(daily_GM)
 
 
@@ -136,7 +139,7 @@ print(portfolio)
 portfolio.pct_change().hist(bins=50,sharex =True)
 plt.show()
 
-################CAGR############# ?????????????????????????????
+################CAGR#############
 SMA = pd.concat([df_daily_GM,df_daily_F,df_daily_BA,df_daily_SP500], keys = ['GM','F','BA', 'SP500'], names=["Tickers", 'Date'])
 SMA = SMA[['Daily_Return']].reset_index().pivot(index = 'Date', columns= 'Tickers', values = 'Daily_Return')
 print(SMA)
@@ -157,23 +160,18 @@ plt.ylabel('Value of CAGR')
 plt.show()
 
 
-############### GM SMA for 42 days and 252 days ###############
+############### GM SMA for 15 days  ###############
 
-print(df_daily_GM['Adj Close'].rolling(window=42).mean(), df_daily_GM['Adj Close'].rolling(window=252).mean())
+print(df_daily_GM['Adj Close'].rolling(window=15).mean())
 
-plt.plot(df_daily_GM['Adj Close'].rolling(window=42).mean())
-plt.plot(df_daily_GM['Adj Close'].rolling(window=252).mean())
+plt.plot(df_daily_GM['Adj Close'].rolling(window=15).mean())
 plt.plot(df_daily_GM['Adj Close'])
 plt.xlabel('Data')
 plt.ylabel("Value of window")
-plt.legend(['42mean','252mean', 'Adj Close'])
+plt.legend(['15mean','Adj Close'])
 plt.show()
 
 ###################
-
-
-
-
 
 
 

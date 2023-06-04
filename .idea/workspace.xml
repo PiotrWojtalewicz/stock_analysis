@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="009579b6-90bd-4bc6-b675-31a247f02b7f" name="Changes" comment="x">
+    <list default="true" id="009579b6-90bd-4bc6-b675-31a247f02b7f" name="Changes" comment="SMA CAGR and plots">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -86,7 +86,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684913745464</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="SMA CAGR and plots">
+      <created>1685566008263</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1685566008263</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -95,6 +102,7 @@
     <MESSAGE value="skews, kurtosis and correlation" />
     <MESSAGE value="download date from yfinance library" />
     <MESSAGE value="x" />
-    <option name="LAST_COMMIT_MESSAGE" value="x" />
+    <MESSAGE value="SMA CAGR and plots" />
+    <option name="LAST_COMMIT_MESSAGE" value="SMA CAGR and plots" />
   </component>
 </project>
