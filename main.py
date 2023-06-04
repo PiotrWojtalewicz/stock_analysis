@@ -4,7 +4,6 @@ import time
 
 import pandas as pd
 import requests
-from bs4 import BeautifulSoup as bs
 import openpyxl
 import matplotlib.pyplot as plt
 import math
